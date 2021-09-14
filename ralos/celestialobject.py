@@ -7,11 +7,13 @@ class CelestialObject:
                  mass: float,
                  location: np.array,
                  velocity: np.array,
+                 interval: np.array,
                  name: str = None):
         self._mass = mass
         self._location = location
         self._velocity = velocity
         self._name = name
+        self._interval = interval
 
     def __str__(self):
         return self._name
@@ -20,6 +22,10 @@ class CelestialObject:
     #  PROPERTIES  #
     ################
 
+    @property
+    def interval(self):
+        return self._interval
+    
     @property
     def mass(self):
         return self._mass
@@ -55,9 +61,8 @@ class CelestialObject:
     #  FUNCTIONS  #
     ###############
 
-    def update_location(self,
-                        interval: int = 1):
-        self.location = self.location + (interval * self.velocity)
+    def update_location(self):
+        self.location = self.location + (self.interval * self.velocity)
 
     def gravity_force(self,
                       celestial: 'CelestialObject'):
@@ -83,4 +88,4 @@ class CelestialObject:
                         celestials: List['CelestialObject']):
         forces = self.all_forces(celestials=celestials)
         total_force = np.sum(forces, axis=0)
-        self.velocity = self.velocity + (total_force/self.mass)
+        self.velocity = self.velocity + (total_force/self.mass)*self.interval

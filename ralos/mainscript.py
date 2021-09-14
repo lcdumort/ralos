@@ -3,8 +3,7 @@ from solarsystem import SolarSystem
 import matplotlib.pyplot as plt
 import numpy as np
 
-solarsystem = SolarSystem(1.989e30)
-print(solarsystem.celestials)
+solarsystem = SolarSystem(1.989e30, 84600)
 solarsystem.add_celestial(mass=5.972e24,
                           location=np.array([150.46e9, 0]),
                           velocity=np.array([0, 29785.0]),
@@ -13,7 +12,7 @@ solarsystem.add_celestial(mass=5.972e24,
 print(solarsystem.celestials)
 sun = []
 earth = []
-for i in range(10000):
+for i in range(180):
     solarsystem.update(timestep=86400)
     sun.append(solarsystem.celestials[0].location)
     earth.append(solarsystem.celestials[1].location)

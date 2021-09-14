@@ -5,8 +5,10 @@ from typing import List
 
 class SolarSystem:
     def __init__(self,
-                 sunmass: float):
+                 sunmass: float,
+                 interval: int):
         self._celestials = []
+        self.interval = interval
         self.add_celestial(location=np.array([0, 0]),
                            mass=sunmass,
                            velocity=np.array([0, 0]),
@@ -29,6 +31,7 @@ class SolarSystem:
         celestial = CelestialObject(mass=mass,
                                     location=location,
                                     velocity=velocity,
+                                    interval=self.interval,
                                     name=name)
         self.celestials.append(celestial)
 
@@ -36,7 +39,7 @@ class SolarSystem:
                timestep=1):
         # update the position for each celestial according to their position
         for celestial in self.celestials:
-            celestial.update_location(interval=timestep)
+            celestial.update_location()
 
         for celestial in self.celestials:
             celestial.velocity_change(self.celestials)
