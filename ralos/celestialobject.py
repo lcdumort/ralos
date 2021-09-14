@@ -6,10 +6,15 @@ class CelestialObject:
     def __init__(self,
                  mass: float,
                  location: np.array,
-                 velocity: np.array):
+                 velocity: np.array,
+                 name: str = None):
         self._mass = mass
         self._location = location
         self._velocity = velocity
+        self._name = name
+
+    def __str__(self):
+        return self._name
 
     ################
     #  PROPERTIES  #
@@ -38,12 +43,12 @@ class CelestialObject:
 
     @velocity.setter
     def velocity(self,
-                 velocity: np.array):
+                 velocity: np.ndarray):
         self._velocity = velocity
 
     @location.setter
     def location(self,
-                 location: np.array):
+                 location: np.ndarray):
         self._location = location
 
     ###############
@@ -59,9 +64,11 @@ class CelestialObject:
         G = 6.67408e-11
         m1 = self.mass
         m2 = celestial.mass
-        rsquared = np.linalg.norm(self.location-celestial.location)**2
+        rsquared = np.linalg.norm(celestial.location - self.location)**2
         if rsquared != 0:
-            return G * m1 * m2 / rsquared
+            g = G * m1 * m2 / rsquared
+            normvector = (celestial.location - self.location)/np.linalg.norm(celestial.location - self.location)
+            return normvector * g
         else:
             return 0
 
@@ -76,4 +83,4 @@ class CelestialObject:
                         celestials: List['CelestialObject']):
         forces = self.all_forces(celestials=celestials)
         total_force = np.sum(forces, axis=0)
-        self.velocity = self.velocity + total_force
+        self.velocity = self.velocity + (total_force/self.mass)
