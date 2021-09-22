@@ -19,6 +19,6 @@ for i in range(180):
 sun = np.array(sun)
 earth = np.array(earth)
 
-plt.scatter(earth[:,0], earth[:,1], c='blue')
-plt.scatter(sun[:,0], sun[:,1], c='yellow')
+plt.scatter(earth[:, 0], earth[:, 1], c='blue')
+plt.scatter(sun[:, 0], sun[:, 1], c='yellow')
 plt.show()

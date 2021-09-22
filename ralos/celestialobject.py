@@ -25,7 +25,7 @@ class CelestialObject:
     @property
     def interval(self):
         return self._interval
-    
+
     @property
     def mass(self):
         return self._mass
@@ -72,7 +72,8 @@ class CelestialObject:
         rsquared = np.linalg.norm(celestial.location - self.location)**2
         if rsquared != 0:
             g = G * m1 * m2 / rsquared
-            normvector = (celestial.location - self.location)/np.linalg.norm(celestial.location - self.location)
+            normvector = ((celestial.location - self.location) /
+                          np.linalg.norm(celestial.location - self.location))
             return normvector * g
         else:
             return 0
