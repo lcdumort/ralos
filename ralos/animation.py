@@ -25,6 +25,6 @@ def animate(i):
             solarsystem.celestials[1].location[1], 
             'bo')
 
-ani = FuncAnimation(fig, animate, frames=365)
-writermp4=FFMpegWriter(fps=30)
-ani.save('solar.mp4', writer=writermp4)
+
+FuncAnimation(fig, animate, frames=365)
+plt.show() 

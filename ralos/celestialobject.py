@@ -76,7 +76,7 @@ class CelestialObject:
                           np.linalg.norm(celestial.location - self.location))
             return normvector * g
         else:
-            return 0
+            return np.zeros(len(self.location)) 
 
     def all_forces(self,
                    celestials: List['CelestialObject']):

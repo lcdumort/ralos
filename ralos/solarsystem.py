@@ -35,8 +35,7 @@ class SolarSystem:
                                     name=name)
         self.celestials.append(celestial)
 
-    def update(self,
-               timestep=1):
+    def update(self):
         # update the position for each celestial according to their position
         for celestial in self.celestials:
             celestial.update_location()
